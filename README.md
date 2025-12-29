@@ -1,20 +1,66 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Eshura - AI Support Platform
 
-# Run and deploy your AI Studio app
+Eshura is a next-generation AI customer support platform designed to automate interactions, provide instant responses, and seamlessly integrate with your existing business tools.
 
-This contains everything you need to run your app locally.
+This repository contains the landing page and frontend implementation for the Eshura platform, built with modern web technologies.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1rDW_06fN_myZprmv3hE7KgUlR0KRxXG2
+## Tech Stack
 
-## Run Locally
+*   **Framework**: React 19
+*   **Build Tool**: Vite
+*   **Styling**: Tailwind CSS
+*   **Language**: TypeScript
+*   **Icons**: Material Symbols (Google Fonts)
 
-**Prerequisites:**  Node.js
+## Getting Started
 
+Follow these steps to set up the project locally on your machine.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Prerequisites
+
+*   Node.js (v18 or higher recommended)
+*   npm or yarn
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/EshuraHQ/Eshura_Landing_Page_1.git
+    ```
+2.  Navigate to the project directory:
+    ```bash
+    cd Eshura_Landing_Page_1
+    ```
+3.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+### Development
+
+To start the local development server:
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:3000`.
+
+### Building for Production
+
+To create a production-ready build:
+
+```bash
+npm run build
+```
+
+## Features
+
+*   **Interactive Chat Widget**: Real-time AI conversation simulation.
+*   **Responsive Design**: Fully optimized for mobile, tablet, and desktop.
+*   **Dark Mode**: Built-in dark theme support.
+*   **Modern UI/UX**: Smooth animations and clean aesthetics.
+
+## License
+
+© Eshura HQ. All rights reserved.

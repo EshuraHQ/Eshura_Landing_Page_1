@@ -1,7 +1,0 @@
-{
-  "name": "ESHURA - AI Support Platform",
-  "description": "A high-performance AI customer support landing page featuring a real-time interactive AI agent powered by Gemini 3 Flash.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
-}
