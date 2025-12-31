@@ -1,6 +1,9 @@
 
 import React from 'react';
 import BlurText from './BlurText';
+import RAGProcessDiagram from './RAGProcessDiagram';
+import AgenticRAGDiagram from './AgenticRAGDiagram';
+import AgenticAIDiagram from './AgenticAIDiagram';
 
 const Services: React.FC = () => {
   return (
@@ -48,18 +51,15 @@ const Services: React.FC = () => {
           </a>
         </div>
 
-        {/* Card 2: Placeholder */}
+        {/* Card 2: Custom RAG Visual */}
         <div className="order-2 md:order-none service-card group relative bg-white dark:bg-card-dark rounded-3xl p-4 h-[360px] border border-gray-200 dark:border-gray-800 shadow-inner flex items-center justify-center">
-          <div className="bg-gray-50 dark:bg-[#252528] w-full h-full rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center">
-            <span className="text-gray-400 dark:text-gray-600 text-sm font-medium">Animation coming soon</span>
-          </div>
+          {/* Background pattern similar to image if needed, for now keeping it clean as per 'blank portion' instruction, but container has light bg */}
+          <RAGProcessDiagram />
         </div>
 
-        {/* Card 3: Placeholder (Moved to Order 4) */}
+        {/* Card 3: Agentic RAG Visual (Moved to Order 4) */}
         <div className="order-4 md:order-none service-card group relative bg-white dark:bg-card-dark rounded-3xl p-4 h-[360px] border border-gray-200 dark:border-gray-800 shadow-inner flex items-center justify-center">
-          <div className="bg-gray-50 dark:bg-[#252528] w-full h-full rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center">
-            <span className="text-gray-400 dark:text-gray-600 text-sm font-medium">Animation coming soon</span>
-          </div>
+          <AgenticRAGDiagram />
         </div>
 
         {/* Card 4: Agentic RAG systems (Moved to Order 3) */}
@@ -118,11 +118,9 @@ const Services: React.FC = () => {
           </a>
         </div>
 
-        {/* Card 6: Placeholder */}
+        {/* Card 6: Agentic AI Diagram */}
         <div className="order-6 md:order-none service-card group relative bg-white dark:bg-card-dark rounded-3xl p-4 h-[360px] border border-gray-200 dark:border-gray-800 shadow-inner flex items-center justify-center">
-          <div className="bg-gray-50 dark:bg-[#252528] w-full h-full rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center">
-            <span className="text-gray-400 dark:text-gray-600 text-sm font-medium">Animation coming soon</span>
-          </div>
+          <AgenticAIDiagram />
         </div>
       </div>
 
