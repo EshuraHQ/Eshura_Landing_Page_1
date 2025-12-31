@@ -115,7 +115,7 @@ const ContactUs: React.FC = () => {
                   <LogoIcon className="w-5 h-5" />
                 </div>
                 <div className="bg-primary text-black px-5 py-4 rounded-2xl rounded-tl-sm text-[15px] font-semibold leading-relaxed shadow-sm">
-                  No, the AI only accesses data it's explicitly trained on. We use strict guardrails to prevent data leakage.
+                  Typing...
                 </div>
               </div>
 

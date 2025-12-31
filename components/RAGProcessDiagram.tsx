@@ -8,7 +8,7 @@ const RAGProcessDiagram: React.FC = () => {
     const stepRef = useRef(0);
 
     useEffect(() => {
-        const stepDuration = 1500; // Time per step
+        const stepDuration = 750; // Time per step
 
         const timer = setInterval(() => {
             stepRef.current = (stepRef.current + 1) % 7;
@@ -260,15 +260,15 @@ const RAGProcessDiagram: React.FC = () => {
                         className={`transition-colors duration-300 ${!isOutputActive ? "text-black dark:text-white" : ""}`}
                     />
 
-                    {/* Green checkmark background circle - pulses when active */}
+                    {/* Green checkmark background circle - only fully visible when active */}
                     <circle
                         cx="22" cy="20"
                         r={isOutputActive ? 16 : 14}
                         fill="#4ADE80"
-                        className="transition-all duration-300"
+                        className={`transition-all duration-300 ${isOutputActive ? 'opacity-100' : 'opacity-20'}`}
                     />
 
-                    {/* Checkmark */}
+                    {/* Checkmark - only visible when active */}
                     <path
                         d="M15 20 L20 25 L30 14"
                         fill="none"
@@ -276,6 +276,7 @@ const RAGProcessDiagram: React.FC = () => {
                         strokeWidth="2.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        className={`transition-opacity duration-300 ${isOutputActive ? 'opacity-100' : 'opacity-20'}`}
                     />
                 </g>
 

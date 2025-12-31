@@ -1,6 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const AgenticAIDiagram: React.FC = () => {
+    // 19 steps animation sequence as specified
+    const [activeStep, setActiveStep] = useState(0);
+    const stepRef = useRef(0);
+
+    useEffect(() => {
+        const stepDuration = 700; // 0.7 seconds per step
+
+        const timer = setInterval(() => {
+            stepRef.current = (stepRef.current + 1) % 19;
+            setActiveStep(stepRef.current);
+        }, stepDuration);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    // Ring positions for each step
+    // Steps with rings: 1, 6, 8, 10, 12 (parallel), 14 (parallel)
+    const ringPositions: { x: number; y: number }[] = [
+        { x: 52, y: 175 },    // 0: Input Query (no ring)
+        { x: 115, y: 145 },   // 1: Input → Planner path midpoint
+        { x: 175, y: 120 },   // 2: Planner (no ring)
+        { x: 177, y: 86 },    // 3: Planner → KB path (no ring per spec)
+        { x: 180, y: 55 },    // 4: Knowledge Base (no ring)
+        { x: 175, y: 120 },   // 5: Planner re-focus (no ring)
+        { x: 175, y: 175 },   // 6: Planner → Task Router path midpoint
+        { x: 175, y: 230 },   // 7: Task Router (no ring)
+        { x: 227, y: 210 },   // 8: Task Router → Sub-agents path midpoint
+        { x: 282, y: 150 },   // 9: Sub-agents (no ring)
+        { x: 282, y: 150 },   // 10: Parallel dispatch - handled separately
+        { x: 282, y: 150 },   // 11: Parallel activation (no ring)
+        { x: 282, y: 150 },   // 12: Parallel return - handled separately
+        { x: 282, y: 150 },   // 13: Sub-agents re-active (no ring)
+        { x: 330, y: 150 },   // 14: Sub-agents → Response Synthesizer path
+        { x: 377, y: 147 },   // 15: Response Synthesizer (no ring)
+        { x: 377, y: 147 },   // 16: Reset (no ring)
+        { x: 462, y: 145 },   // 17: Completion - checkmark
+        { x: 462, y: 145 },   // 18: Loop pause
+    ];
+    const currentRingPos = ringPositions[activeStep];
+
+    // Ring visibility
+    // Single ring: 1, 6, 8, 14
+    // Parallel rings: 10, 12
+    const isSingleRingVisible = [1, 6, 8, 14].includes(activeStep);
+    const isParallelRingsVisible = [10, 12].includes(activeStep);
+
+    // Node highlight states
+    const isInputActive = activeStep === 0;
+    const isPlannerActive = activeStep === 2 || activeStep === 4 || activeStep === 5;
+    const isKnowledgeBaseActive = activeStep === 4 || activeStep === 11;
+    const isTaskRouterActive = activeStep === 7;
+    const isSubAgentsActive = activeStep === 9 || activeStep === 13;
+    const isToolsActive = activeStep === 11;
+    const isResponseSynthesizerActive = activeStep === 15;
+    const isCheckmarkVisible = activeStep === 17;
+
+    // Parallel ring positions
+    // Step 10 & 12: Sub-agents ↔ Knowledge Base, Sub-agents ↔ Tools
+    const parallelRing1 = activeStep === 10
+        ? { x: 230, y: 70 }   // Sub-agents → KB direction
+        : { x: 240, y: 70 };  // KB → Sub-agents return
+    const parallelRing2 = activeStep === 10
+        ? { x: 225, y: 255 }  // Sub-agents → Tools direction
+        : { x: 230, y: 250 }; // Tools → Sub-agents return
+
     return (
         <div className="w-full h-full flex items-center justify-center p-2">
             <svg
@@ -33,9 +98,9 @@ const AgenticAIDiagram: React.FC = () => {
                     className="text-gray-400 dark:text-gray-500"
                 />
 
-                {/* Planner to Sub-agents */}
+                {/* Planner to Knowledge Base */}
                 <path
-                    d="M200 120 L250 120"
+                    d="M175 95 L180 77"
                     stroke="currentColor"
                     strokeWidth="1.5"
                     strokeDasharray="4 4"
@@ -45,7 +110,7 @@ const AgenticAIDiagram: React.FC = () => {
 
                 {/* Knowledge Base to Sub-agents */}
                 <path
-                    d="M210 55 C230 55 230 80 260 80"
+                    d="M202 55 C230 55 240 75 255 85"
                     stroke="currentColor"
                     strokeWidth="1.5"
                     strokeDasharray="4 4"
@@ -55,7 +120,7 @@ const AgenticAIDiagram: React.FC = () => {
 
                 {/* Task Router to Sub-agents */}
                 <path
-                    d="M200 230 L250 180"
+                    d="M200 230 C230 230 240 200 255 190"
                     stroke="currentColor"
                     strokeWidth="1.5"
                     strokeDasharray="4 4"
@@ -65,7 +130,7 @@ const AgenticAIDiagram: React.FC = () => {
 
                 {/* Sub-agents to Tools (bottom) */}
                 <path
-                    d="M282 215 L195 295"
+                    d="M255 215 C230 250 210 280 195 295"
                     stroke="currentColor"
                     strokeWidth="1.5"
                     strokeDasharray="4 4"
@@ -73,7 +138,7 @@ const AgenticAIDiagram: React.FC = () => {
                     className="text-gray-400 dark:text-gray-500"
                 />
 
-                {/* Sub-agents to Sub-agents icon */}
+                {/* Sub-agents to Response Synthesizer */}
                 <path
                     d="M310 150 L350 150"
                     stroke="currentColor"
@@ -83,7 +148,7 @@ const AgenticAIDiagram: React.FC = () => {
                     className="text-gray-400 dark:text-gray-500"
                 />
 
-                {/* Sub-agents icon to Response Synthesizer */}
+                {/* Response Synthesizer to Final Output */}
                 <path
                     d="M400 150 L430 150"
                     stroke="currentColor"
@@ -103,9 +168,9 @@ const AgenticAIDiagram: React.FC = () => {
                         width="65" height="40"
                         rx="6"
                         fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="text-black dark:text-white"
+                        stroke={isInputActive ? "#4ADE80" : "currentColor"}
+                        strokeWidth={isInputActive ? "2.5" : "2"}
+                        className={`transition-colors duration-300 ${!isInputActive ? "text-black dark:text-white" : ""}`}
                     />
                     <text
                         x="32" y="18"
@@ -137,18 +202,18 @@ const AgenticAIDiagram: React.FC = () => {
                     <circle
                         cx="0" cy="0"
                         r="25"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
+                        stroke={isPlannerActive ? "#4ADE80" : "currentColor"}
+                        strokeWidth={isPlannerActive ? "2.5" : "1.5"}
                         strokeDasharray="4 4"
                         fill="none"
-                        className="text-gray-400 dark:text-gray-500"
+                        className={`transition-colors duration-300 ${!isPlannerActive ? "text-gray-400 dark:text-gray-500" : ""}`}
                     />
                     {/* Person icon */}
                     <circle cx="0" cy="-6" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
                     <path d="M-10 12 Q0 5 10 12" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
 
                     <text
-                        x="-30" y="-30"
+                        x="-40" y="-30"
                         fill="currentColor"
                         fontSize="11"
                         fontWeight="500"
@@ -166,18 +231,18 @@ const AgenticAIDiagram: React.FC = () => {
                     <circle
                         cx="0" cy="0"
                         r="25"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
+                        stroke={isTaskRouterActive ? "#4ADE80" : "currentColor"}
+                        strokeWidth={isTaskRouterActive ? "2.5" : "1.5"}
                         strokeDasharray="4 4"
                         fill="none"
-                        className="text-gray-400 dark:text-gray-500"
+                        className={`transition-colors duration-300 ${!isTaskRouterActive ? "text-gray-400 dark:text-gray-500" : ""}`}
                     />
                     {/* Person icon */}
                     <circle cx="0" cy="-6" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
                     <path d="M-10 12 Q0 5 10 12" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
 
                     <text
-                        x="-20" y="45"
+                        x="-25" y="40"
                         fill="currentColor"
                         fontSize="10"
                         fontWeight="500"
@@ -186,7 +251,7 @@ const AgenticAIDiagram: React.FC = () => {
                         Task
                     </text>
                     <text
-                        x="-25" y="57"
+                        x="-30" y="52"
                         fill="currentColor"
                         fontSize="10"
                         fontWeight="500"
@@ -204,11 +269,11 @@ const AgenticAIDiagram: React.FC = () => {
                     <circle
                         cx="0" cy="0"
                         r="22"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
+                        stroke={isKnowledgeBaseActive ? "#4ADE80" : "currentColor"}
+                        strokeWidth={isKnowledgeBaseActive ? "2.5" : "1.5"}
                         strokeDasharray="4 4"
                         fill="none"
-                        className="text-gray-400 dark:text-gray-500"
+                        className={`transition-colors duration-300 ${!isKnowledgeBaseActive ? "text-gray-400 dark:text-gray-500" : ""}`}
                     />
                     {/* Database icon */}
                     <ellipse cx="0" cy="-8" rx="10" ry="4" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
@@ -244,28 +309,28 @@ const AgenticAIDiagram: React.FC = () => {
                         width="55" height="130"
                         rx="12"
                         fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="text-black dark:text-white"
+                        stroke={isSubAgentsActive ? "#4ADE80" : "currentColor"}
+                        strokeWidth={isSubAgentsActive ? "2.5" : "2"}
+                        className={`transition-colors duration-300 ${!isSubAgentsActive ? "text-black dark:text-white" : ""}`}
                     />
 
                     {/* Person 1 */}
                     <g transform="translate(27, 28)">
-                        <circle cx="0" cy="0" r="12" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
+                        <circle cx="0" cy="0" r="12" stroke={isSubAgentsActive ? "#4ADE80" : "currentColor"} strokeWidth="1.5" fill="none" className={`transition-colors duration-300 ${!isSubAgentsActive ? "text-black dark:text-white" : ""}`} />
                         <circle cx="0" cy="-3" r="4" stroke="currentColor" strokeWidth="1" fill="none" className="text-black dark:text-white" />
                         <path d="M-6 7 Q0 3 6 7" stroke="currentColor" strokeWidth="1" fill="none" className="text-black dark:text-white" />
                     </g>
 
                     {/* Person 2 */}
                     <g transform="translate(27, 65)">
-                        <circle cx="0" cy="0" r="12" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
+                        <circle cx="0" cy="0" r="12" stroke={isSubAgentsActive ? "#4ADE80" : "currentColor"} strokeWidth="1.5" fill="none" className={`transition-colors duration-300 ${!isSubAgentsActive ? "text-black dark:text-white" : ""}`} />
                         <circle cx="0" cy="-3" r="4" stroke="currentColor" strokeWidth="1" fill="none" className="text-black dark:text-white" />
                         <path d="M-6 7 Q0 3 6 7" stroke="currentColor" strokeWidth="1" fill="none" className="text-black dark:text-white" />
                     </g>
 
                     {/* Person 3 */}
                     <g transform="translate(27, 102)">
-                        <circle cx="0" cy="0" r="12" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black dark:text-white" />
+                        <circle cx="0" cy="0" r="12" stroke={isSubAgentsActive ? "#4ADE80" : "currentColor"} strokeWidth="1.5" fill="none" className={`transition-colors duration-300 ${!isSubAgentsActive ? "text-black dark:text-white" : ""}`} />
                         <circle cx="0" cy="-3" r="4" stroke="currentColor" strokeWidth="1" fill="none" className="text-black dark:text-white" />
                         <path d="M-6 7 Q0 3 6 7" stroke="currentColor" strokeWidth="1" fill="none" className="text-black dark:text-white" />
                     </g>
@@ -292,9 +357,9 @@ const AgenticAIDiagram: React.FC = () => {
                         width="55" height="30"
                         rx="6"
                         fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="text-black dark:text-white"
+                        stroke={isToolsActive ? "#4ADE80" : "currentColor"}
+                        strokeWidth={isToolsActive ? "2.5" : "2"}
+                        className={`transition-colors duration-300 ${!isToolsActive ? "text-black dark:text-white" : ""}`}
                     />
                     <text
                         x="28" y="20"
@@ -318,9 +383,9 @@ const AgenticAIDiagram: React.FC = () => {
                         width="45" height="45"
                         rx="8"
                         fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        className="text-black dark:text-white"
+                        stroke={isResponseSynthesizerActive ? "#4ADE80" : "currentColor"}
+                        strokeWidth={isResponseSynthesizerActive ? "2" : "1.5"}
+                        className={`transition-colors duration-300 ${!isResponseSynthesizerActive ? "text-black dark:text-white" : ""}`}
                     />
                     {/* Cloud/thought icon with person */}
                     <path d="M12 30 Q8 30 8 25 Q8 20 15 20 Q15 15 22 15 Q30 15 32 22 Q38 22 38 27 Q38 32 32 32 L15 32" stroke="currentColor" strokeWidth="1" fill="none" className="text-black dark:text-white" />
@@ -371,8 +436,13 @@ const AgenticAIDiagram: React.FC = () => {
                         className="text-black dark:text-white"
                     />
 
-                    {/* Green checkmark */}
-                    <circle cx="32" cy="30" r="18" fill="#4ADE80" />
+                    {/* Green checkmark - visible at step 17 */}
+                    <circle
+                        cx="32" cy="30"
+                        r={isCheckmarkVisible ? 20 : 18}
+                        fill="#4ADE80"
+                        className={`transition-all duration-300 ${isCheckmarkVisible ? 'opacity-100' : 'opacity-30'}`}
+                    />
                     <path
                         d="M22 30 L28 36 L42 22"
                         fill="none"
@@ -380,8 +450,54 @@ const AgenticAIDiagram: React.FC = () => {
                         strokeWidth="3"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        className={`transition-opacity duration-300 ${isCheckmarkVisible ? 'opacity-100' : 'opacity-50'}`}
                     />
                 </g>
+
+
+                {/* ============================================ */}
+                {/* ANIMATED RING (Single)                       */}
+                {/* ============================================ */}
+                {isSingleRingVisible && (
+                    <circle
+                        cx={currentRingPos.x}
+                        cy={currentRingPos.y}
+                        r="10"
+                        fill="white"
+                        stroke="#4ADE80"
+                        strokeWidth="3"
+                        className="dark:fill-[#1E1E1E] transition-all duration-700 ease-in-out"
+                    />
+                )}
+
+
+                {/* ============================================ */}
+                {/* ANIMATED RINGS (Parallel - Steps 10 & 12)    */}
+                {/* ============================================ */}
+                {isParallelRingsVisible && (
+                    <>
+                        {/* Ring 1: Sub-agents ↔ Knowledge Base path */}
+                        <circle
+                            cx={parallelRing1.x}
+                            cy={parallelRing1.y}
+                            r="8"
+                            fill="white"
+                            stroke="#4ADE80"
+                            strokeWidth="3"
+                            className="dark:fill-[#1E1E1E]"
+                        />
+                        {/* Ring 2: Sub-agents ↔ Tools path */}
+                        <circle
+                            cx={parallelRing2.x}
+                            cy={parallelRing2.y}
+                            r="8"
+                            fill="white"
+                            stroke="#4ADE80"
+                            strokeWidth="3"
+                            className="dark:fill-[#1E1E1E]"
+                        />
+                    </>
+                )}
 
             </svg>
         </div>
