@@ -9,13 +9,13 @@ export const getGeminiResponse = async (userMessage: string, history: { role: 'u
   }
 
   const ai = new GoogleGenAI({ apiKey: API_KEY });
-  
+
   // Format history for Gemini API
   const contents = history.map(msg => ({
     role: msg.role === 'assistant' ? 'model' : 'user',
     parts: [{ text: msg.text }]
   }));
-  
+
   // Add the current message
   contents.push({
     role: 'user',

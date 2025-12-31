@@ -1,0 +1,41 @@
+/* Eshura Landing Page - Global Styles */
+
+/* Base layer for additional custom styles beyond Tailwind CDN */
+
+/* Smooth scrolling for the entire page */
+html {
+  /* Removed scroll-behavior: smooth to prevent fighting with browser scroll */
+  scroll-padding-top: 100px; /* Offset for fixed navbar */
+}
+
+/* Custom scrollbar hiding utility (mirrors index.html styles) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid #bef264;
+  outline-offset: 2px;
+}
+
+/* Skip to main content link (accessibility) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #bef264;
+  color: black;
+  padding: 8px 16px;
+  z-index: 100;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 0;
+}

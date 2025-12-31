@@ -49,30 +49,47 @@ const WorkingProcess: React.FC = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-6 lg:px-12 py-24">
+    <section className="max-w-7xl mx-auto px-6 lg:px-12 py-24" aria-labelledby="working-process-heading">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 mb-16">
-        <div className="bg-primary text-black text-3xl md:text-4xl font-display font-bold px-4 py-1.5 rounded-xl select-none">
+        <h2 id="working-process-heading" className="bg-primary text-black text-3xl md:text-4xl font-display font-bold px-4 py-1.5 rounded-xl select-none">
           <BlurText text="Our Working Process" delay={80} />
-        </div>
+        </h2>
         <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg max-w-sm leading-relaxed font-light">
           Step-by-Step Guide to Achieving Your Business Goals
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-6" role="list">
         {steps.map((step, index) => {
           const isExpanded = expandedIndex === index;
+          const panelId = `process-panel-${step.number}`;
+          const headerId = `process-header-${step.number}`;
+
           return (
             <div
               key={step.number}
-              onClick={() => toggleStep(index)}
-              className={`border-2 rounded-5xl transition-all duration-300 cursor-pointer overflow-hidden ${isExpanded
-                  ? 'bg-primary border-border-dark dark:border-white shadow-hard dark:shadow-hard-white'
-                  : 'bg-surface-light dark:bg-surface-dark border-border-dark dark:border-gray-700 shadow-hard hover:bg-gray-200 dark:hover:bg-gray-800'
+              className={`border-2 rounded-3xl md:rounded-5xl transition-all duration-300 overflow-hidden ${isExpanded
+                ? 'bg-primary border-border-dark dark:border-white shadow-hard dark:shadow-hard-white'
+                : 'bg-surface-light dark:bg-surface-dark border-border-dark dark:border-gray-700 shadow-hard hover:bg-gray-200 dark:hover:bg-gray-800'
                 }`}
+              role="listitem"
             >
               <div className="p-8 md:p-10">
-                <div className="flex justify-between items-center">
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleStep(index)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleStep(index);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
+                  aria-controls={panelId}
+                  id={headerId}
+                >
                   <div className="flex items-center gap-6 md:gap-10">
                     <span className={`text-4xl md:text-6xl font-bold font-display ${isExpanded ? 'text-black' : 'text-black dark:text-white'}`}>
                       {step.number}
@@ -81,14 +98,22 @@ const WorkingProcess: React.FC = () => {
                       {step.title}
                     </h3>
                   </div>
-                  <button className={`w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full border border-black dark:border-white bg-white dark:bg-gray-700 flex-shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                  <div
+                    className={`w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full border border-black dark:border-white bg-white dark:bg-gray-700 flex-shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                    aria-hidden="true"
+                  >
                     <span className="material-icons text-black dark:text-white font-bold text-2xl">
                       {isExpanded ? 'remove' : 'add'}
                     </span>
-                  </button>
+                  </div>
                 </div>
 
-                <div className={`transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[500px] opacity-100 mt-8' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={headerId}
+                  className={`transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[500px] opacity-100 mt-8' : 'max-h-0 opacity-0 overflow-hidden'}`}
+                >
                   <hr className="border-t border-black/20 dark:border-white/20 mb-8" />
                   <p className={`text-base md:text-xl leading-relaxed ${isExpanded ? 'text-black' : 'text-gray-600 dark:text-gray-400'}`}>
                     {step.description}

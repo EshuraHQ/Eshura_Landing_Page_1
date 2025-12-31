@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
+import { LogoIcon } from './Logo';
 
-const LogoIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
-  <svg className={`${className} text-white dark:text-black fill-none stroke-current`} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <path d="M25 25V75L75 35" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M75 75V25L25 65" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const ChatWidget: React.FC = () => {
+const ChatWidget: React.FC = memo(() => {
   const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
@@ -37,12 +31,16 @@ const ChatWidget: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-[440px] bg-white dark:bg-surface-dark rounded-3xl shadow-chat dark:shadow-chat-dark border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col h-[580px] relative animate-float pointer-events-none select-none">
+    <div
+      className="w-full max-w-[440px] bg-white dark:bg-surface-dark rounded-3xl shadow-chat dark:shadow-chat-dark border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col h-[580px] relative animate-float pointer-events-none select-none"
+      role="img"
+      aria-label="Example AI chat conversation showing order tracking"
+    >
       {/* Browser Controls */}
       <div className="h-10 w-full bg-white dark:bg-gray-900 border-b border-gray-50 dark:border-gray-800 flex items-center px-4 gap-2">
-        <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
-        <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
-        <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+        <div className="w-3 h-3 rounded-full bg-[#FF5F56]" aria-hidden="true"></div>
+        <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" aria-hidden="true"></div>
+        <div className="w-3 h-3 rounded-full bg-[#27C93F]" aria-hidden="true"></div>
       </div>
 
       {/* Message Area */}
@@ -85,7 +83,7 @@ const ChatWidget: React.FC = () => {
       {/* Input Area (Visual Only) */}
       <div className="p-5 bg-white dark:bg-surface-dark border-t border-gray-50 dark:border-gray-800">
         <div className="relative flex items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl px-4 py-3">
-          <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500 mr-3">
+          <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500 mr-3" aria-hidden="true">
             <span className="material-symbols-outlined text-[22px]">image</span>
             <span className="material-symbols-outlined text-[22px]">code</span>
             <span className="material-symbols-outlined text-[22px]">mic</span>
@@ -93,7 +91,7 @@ const ChatWidget: React.FC = () => {
           <div className="flex-1 text-gray-400 dark:text-gray-500 text-[15px]">
             Type a message...
           </div>
-          <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500">
+          <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-500" aria-hidden="true">
             <span className="material-symbols-outlined text-[20px]">arrow_upward</span>
           </div>
         </div>
@@ -103,6 +101,8 @@ const ChatWidget: React.FC = () => {
       </div>
     </div>
   );
-};
+});
+
+ChatWidget.displayName = 'ChatWidget';
 
 export default ChatWidget;
