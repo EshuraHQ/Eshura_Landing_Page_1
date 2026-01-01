@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
         <a href="/" onClick={(e) => handleNavClick(e, '/')} className="group flex items-center gap-2" aria-label="Eshura Home">
-          <Logo />
+          <Logo /> <b className=''>Eshura</b>
         </a>
 
         {/* Desktop Navigation */}

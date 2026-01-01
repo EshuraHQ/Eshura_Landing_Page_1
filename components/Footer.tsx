@@ -35,7 +35,10 @@ const Footer: React.FC = () => {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand Column (Span 4) */}
           <div className="lg:col-span-4 space-y-8">
-            <Logo />
+            <div className="flex items-center gap-2">
+  <Logo variant="light" />
+  <b className="text-lg font-semibold">Eshura</b>
+</div>
             <div className="space-y-6 text-gray-400">
               <div>
                 <span className="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">Contact</span>

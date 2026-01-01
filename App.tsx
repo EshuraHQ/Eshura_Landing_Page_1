@@ -8,6 +8,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Footer from './components/Footer';
 // import ThemeToggle from './components/ThemeToggle';
 import FloatingChatButton from './components/FloatingChatButton';
+import UseCase from './pages/UseCase';
+import ServiceDetail from './pages/ServiceDetail';
+import ServicesList from './pages/ServicesList';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -56,6 +59,9 @@ const App: React.FC = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/use-case" element={<UseCase />} />
+          <Route path="/services" element={<ServicesList />} />
+          <Route path="/service/:id" element={<ServiceDetail />} />
         </Routes>
       </Layout>
     </Router>

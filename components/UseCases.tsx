@@ -1,16 +1,17 @@
 
 import React from 'react';
 import BlurText from './BlurText';
+import { NavLink } from 'react-router-dom';
 
 const UseCaseItem: React.FC<{ text: string; borderRight?: boolean }> = ({ text, borderRight }) => (
   <article className={`flex flex-col justify-between group relative py-6 md:py-0 ${borderRight ? 'md:pr-12 md:border-r border-gray-700' : 'md:px-12 md:border-r border-gray-700 last:border-0 last:pr-0'}`}>
     <p className="text-gray-200 text-lg leading-relaxed mb-10">
       {text}
     </p>
-    <a className="inline-flex items-center text-primary hover:text-white transition-colors text-lg font-medium group-hover:underline decoration-primary underline-offset-8" href="#">
+    <NavLink to={"/use-case"} className="inline-flex items-center text-primary hover:text-white transition-colors text-lg font-medium group-hover:underline decoration-primary underline-offset-8">
       Learn more
       <span className="material-icons ml-2 transform rotate-[-45deg] text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">arrow_forward</span>
-    </a>
+    </NavLink>
   </article>
 );
 

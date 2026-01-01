@@ -1,0 +1,104 @@
+[
+  {
+    "id": "custom-rag-chatbots",
+    "title": "Custom RAG Chatbots",
+    "subtitle": "Intelligent conversational AI powered by Retrieval-Augmented Generation",
+    "description": "Our Custom RAG Chatbots combine the power of large language models with your proprietary knowledge base to deliver accurate, context-aware responses. Perfect for customer support, internal knowledge management, and personalized user interactions.",
+    "features": [
+      "Domain-specific knowledge integration",
+      "Real-time information retrieval",
+      "Contextual conversation handling",
+      "Multi-language support",
+      "Seamless API integration",
+      "Advanced analytics and reporting"
+    ],
+    "benefits": [
+      "Reduce response time by 80%",
+      "Improve customer satisfaction scores",
+      "Scale support without increasing headcount",
+      "Maintain brand consistency",
+      "Access to 24/7 intelligent assistance"
+    ],
+    "useCases": [
+      "Customer support automation",
+      "Internal knowledge base queries",
+      "Product recommendation systems",
+      "Technical documentation assistance",
+      "HR policy inquiries"
+    ],
+    "pricing": {
+      "starter": "$499/month",
+      "professional": "$1,299/month",
+      "enterprise": "Custom pricing"
+    },
+    "image": "/images/custom-rag-diagram.svg"
+  },
+  {
+    "id": "agentic-rag-systems",
+    "title": "Agentic RAG Systems",
+    "subtitle": "Autonomous AI agents that reason, plan, and execute complex tasks",
+    "description": "Agentic RAG Systems go beyond simple chatbots by incorporating reasoning capabilities, tool usage, and autonomous decision-making. These systems can handle multi-step processes, integrate with external APIs, and adapt their behavior based on context and goals.",
+    "features": [
+      "Autonomous task execution",
+      "Multi-tool integration",
+      "Reasoning and planning capabilities",
+      "Dynamic knowledge updating",
+      "Error handling and recovery",
+      "Performance monitoring and optimization"
+    ],
+    "benefits": [
+      "Handle complex, multi-step workflows",
+      "Reduce human intervention in routine tasks",
+      "Improve accuracy through contextual reasoning",
+      "Scale operations efficiently",
+      "Enable 24/7 autonomous operations"
+    ],
+    "useCases": [
+      "Automated customer onboarding",
+      "Complex data analysis and reporting",
+      "Intelligent workflow automation",
+      "Research and information synthesis",
+      "Personalized content generation"
+    ],
+    "pricing": {
+      "starter": "$899/month",
+      "professional": "$2,299/month",
+      "enterprise": "Custom pricing"
+    },
+    "image": "/images/agentic-rag-diagram.svg"
+  },
+  {
+    "id": "agentic-ai-chatbots",
+    "title": "Agentic AI Chatbots",
+    "subtitle": "Next-generation conversational AI with autonomous capabilities",
+    "description": "Our Agentic AI Chatbots represent the cutting edge of conversational AI, combining natural language understanding with autonomous action-taking abilities. These systems can not only converse but also perform tasks, make decisions, and learn from interactions.",
+    "features": [
+      "Natural language understanding",
+      "Autonomous action execution",
+      "Continuous learning from interactions",
+      "Multi-modal input processing",
+      "Emotional intelligence simulation",
+      "Advanced personalization"
+    ],
+    "benefits": [
+      "Deliver hyper-personalized experiences",
+      "Handle complex customer requests autonomously",
+      "Continuously improve through machine learning",
+      "Support multiple communication channels",
+      "Provide emotional support and empathy"
+    ],
+    "useCases": [
+      "Advanced customer service",
+      "Personal shopping assistants",
+      "Mental health support companions",
+      "Educational tutoring systems",
+      "Creative collaboration partners"
+    ],
+    "pricing": {
+      "starter": "$699/month",
+      "professional": "$1,799/month",
+      "enterprise": "Custom pricing"
+    },
+    "image": "/images/agentic-ai-diagram.svg"
+  }
+]

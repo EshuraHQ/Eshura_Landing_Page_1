@@ -5,7 +5,7 @@ import BlurText from './BlurText';
 
 const Hero: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[85vh]">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Left Side: Content */}
         <div className="flex flex-col justify-center space-y-8 animate-fade-in-up">
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
             </a>
           </div>
 
-          <div className="pt-8 flex flex-col gap-4">
+          {/* <div className="pt-8 flex flex-col gap-4">
             <p className="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest">Trusted by innovative teams</p>
             <div className="flex flex-wrap gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
               <div className="h-8 flex items-center gap-2">
@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
                 <span className="font-bold text-gray-800 dark:text-white text-sm">LangGraph</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Right Side: Chat Widget */}

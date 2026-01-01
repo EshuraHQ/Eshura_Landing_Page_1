@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import BlurText from './BlurText';
 import RAGProcessDiagram from './RAGProcessDiagram';
 import AgenticRAGDiagram from './AgenticRAGDiagram';
@@ -43,12 +44,12 @@ const Services: React.FC = () => {
               <path d="M40 120 L50 120 M45 115 L45 125" strokeWidth="1.5"></path>
             </svg>
           </div>
-          <a className="inline-flex items-center gap-3 text-sm font-semibold tracking-wide z-10 group/link" href="#">
+          <Link className="inline-flex items-center gap-3 text-sm font-semibold tracking-wide z-10 group/link" to="/service/custom-rag-chatbots">
             <div className="icon-circle w-10 h-10 rounded-full bg-black dark:bg-white flex items-center justify-center transition-all duration-300">
               <span className="material-icons text-white dark:text-black transform -rotate-45 text-lg group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform">arrow_forward</span>
             </div>
             <span className="text-black dark:text-white border-b border-transparent group-hover/link:border-black dark:group-hover/link:border-white transition-all">Learn more</span>
-          </a>
+          </Link>
         </div>
 
         {/* Card 2: Custom RAG Visual */}
@@ -84,12 +85,12 @@ const Services: React.FC = () => {
               <path d="M145 58 C145 55 142 55 142 57 C142 59 145 61 145 61 C145 61 148 59 148 57 C148 55 145 55 145 58 Z" fill="black"></path>
             </svg>
           </div>
-          <a className="inline-flex items-center gap-3 text-sm font-semibold tracking-wide z-10 group/link" href="#">
+          <Link className="inline-flex items-center gap-3 text-sm font-semibold tracking-wide z-10 group/link" to="/service/agentic-rag-systems">
             <div className="icon-circle w-10 h-10 rounded-full bg-white dark:bg-black border border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-300">
               <span className="material-icons text-black dark:text-white transform -rotate-45 text-lg group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform">arrow_forward</span>
             </div>
             <span className="text-black dark:text-white border-b border-transparent group-hover/link:border-black dark:group-hover/link:border-white transition-all">Learn more</span>
-          </a>
+          </Link>
         </div>
 
         {/* Card 5: Agentic AI chatbots */}
@@ -110,12 +111,12 @@ const Services: React.FC = () => {
               <circle className="dark:fill-white" cx="140" cy="50" fill="black" r="15"></circle>
             </svg>
           </div>
-          <a className="inline-flex items-center gap-3 text-sm font-semibold tracking-wide z-10 group/link" href="#">
+          <Link className="inline-flex items-center gap-3 text-sm font-semibold tracking-wide z-10 group/link" to="/service/agentic-ai-chatbots">
             <div className="icon-circle w-10 h-10 rounded-full bg-black dark:bg-white flex items-center justify-center transition-all duration-300">
               <span className="material-icons text-white dark:text-black transform -rotate-45 text-lg group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform">arrow_forward</span>
             </div>
             <span className="text-black dark:text-white border-b border-transparent group-hover/link:border-black dark:group-hover/link:border-white transition-all">Learn more</span>
-          </a>
+          </Link>
         </div>
 
         {/* Card 6: Agentic AI Diagram */}
@@ -125,13 +126,13 @@ const Services: React.FC = () => {
       </div>
 
       <div className="mt-20 flex justify-center">
-        <a
-          href="#"
+        <Link
+          to="/services"
           className="group inline-flex items-center gap-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-10 py-5 rounded-2xl text-lg font-bold shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 transform"
         >
           Explore More Services
           <span className="material-icons group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
+        </Link>
       </div>
     </section>
   );
