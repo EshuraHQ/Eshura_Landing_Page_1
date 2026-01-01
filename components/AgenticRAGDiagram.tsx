@@ -8,7 +8,7 @@ const AgenticRAGDiagram: React.FC = () => {
     const [activeStep, setActiveStep] = useState(0);
 
     useEffect(() => {
-        const stepDuration = 1200;
+        const stepDuration = 750;
 
         const timer = setInterval(() => {
             setActiveStep((prev) => {
@@ -314,12 +314,12 @@ const AgenticRAGDiagram: React.FC = () => {
                             className={`transition-colors duration-300 ${!isOutputActive ? "text-black dark:text-white" : ""}`}
                         />
 
-                        {/* Larger centered checkmark - pulses when active */}
+                        {/* Larger centered checkmark - only fully visible when active */}
                         <circle
                             cx="40" cy="30"
                             r={isOutputActive ? 22 : 20}
                             fill="#4ADE80"
-                            className="transition-all duration-300"
+                            className={`transition-all duration-300 ${isOutputActive ? 'opacity-100' : 'opacity-20'}`}
                         />
                         <path
                             d="M30 30 L37 37 L50 22"
@@ -328,6 +328,7 @@ const AgenticRAGDiagram: React.FC = () => {
                             strokeWidth="3"
                             strokeLinecap="round"
                             strokeLinejoin="round"
+                            className={`transition-opacity duration-300 ${isOutputActive ? 'opacity-100' : 'opacity-20'}`}
                         />
                     </g>
 
