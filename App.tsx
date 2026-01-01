@@ -7,6 +7,7 @@ import Blog from './pages/Blog';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
+import FloatingChatButton from './components/FloatingChatButton';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -40,7 +41,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {children}
       </main>
       <Footer />
-      <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
+      {/* <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} /> */}
+      <FloatingChatButton />
     </div>
   );
 };
